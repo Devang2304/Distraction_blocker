@@ -3,27 +3,27 @@ document.addEventListener('DOMContentLoaded', function() {
   const statusDiv = document.getElementById('status');
   const optionsLink = document.getElementById('optionsLink');
   
-  // Load current state
+  
   chrome.storage.sync.get({ enabled: true }, function(data) {
     updateUI(data.enabled);
   });
   
-  // Toggle blocking state
   toggleButton.addEventListener('click', function() {
     chrome.storage.sync.get({ enabled: true }, function(data) {
       const newState = !data.enabled;
       chrome.storage.sync.set({ enabled: newState }, function() {
         updateUI(newState);
+        if (!newState) {
+          chrome.runtime.sendMessage({ action: "postToTwitter" });
+        }
       });
     });
   });
   
-  // Open options page
   optionsLink.addEventListener('click', function() {
     chrome.runtime.openOptionsPage();
   });
   
-  // Update UI based on state
   function updateUI(enabled) {
     if (enabled) {
       statusDiv.textContent = 'Blocking is currently enabled';

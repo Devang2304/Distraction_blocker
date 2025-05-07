@@ -83,13 +83,13 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-// Function to create and post to Twitter
+
 function postToTwitter() {
     const message = encodeURIComponent("I just disabled my Distraction Blocker extension because I couldn't resist the urge. I need to be more disciplined! 😅 #DistractionBlocker #SelfControl");
     const twitterUrl = `https://twitter.com/intent/tweet?text=${message}`;
     
     chrome.tabs.create({ url: twitterUrl }, (tab) => {
-        // After a short delay, try to click the tweet button
+
         setTimeout(() => {
             chrome.scripting.executeScript({
                 target: { tabId: tab.id },
@@ -104,11 +104,17 @@ function postToTwitter() {
     });
 }
 
-// Listen for extension uninstall
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.action === "postToTwitter") {
+        postToTwitter();
+    }
+});
+
+
 chrome.runtime.onSuspend.addListener(() => {
     postToTwitter();
 });
 
-// Backup uninstall detection
+
 chrome.runtime.setUninstallURL('https://twitter.com/intent/tweet?text=' + 
     encodeURIComponent("I just uninstalled my Distraction Blocker extension because I couldn't resist the urge. I need to be more disciplined! 😅 #DistractionBlocker #SelfControl"));

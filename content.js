@@ -122,7 +122,7 @@ function checkForBlockedKeywords() {
         const metaDescription = document.querySelector('meta[name="description"]')?.content?.toLowerCase() || '';
         const url = window.location.href.toLowerCase();
         
-        // Check for keywords in different contexts
+        // Check for keywords in different context
         const foundKeyword = data.blockedKeywords.find(keyword => {
             const lowerKeyword = keyword.toLowerCase();
             
