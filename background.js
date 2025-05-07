@@ -1,51 +1,70 @@
 // Predefined list of blocked keywords
 const defaultBlockedKeywords = [
-"gossip","meme","Arse","Ass","Asshole","Homosexual","Homophobic","Racist","Gay","Lgbt","Jew",
-  "Jewish","Anti-semitic","Chink","Muslims","Muslim","Isis","Islamophobe","homophobe,","Bombing",
-  "Sexyhot","Bastard","Bitch","Fucker","Cunt","Damn","Fuck","Goddamn","Shit","Motherfucker","Nigga",
-  "Nigger","Prick","Shit","shit,ass","Shitass","son,of,a,bitch","Whore","Thot","Slut","Faggot","Dick",
-  "Pussy","Penis","Vagina","Negro","Coon","Bitched","Sexist","Freaking","Cock","Sucker","Lick","Licker",
-  "Rape","Molest","Anal","Buttrape","Coont","Cancer","Sex","Retard","Fuckface","Dumbass","5h1t","5hit",
-  "A_s_s","a2m","a55","adult","amateur","anal","anal,impaler†††","anal,leakage†††","anilingus","anus","ar5e",
-  "arrse","arse","arsehole","ass","ass,fuck†††","asses","assfucker","ass-fucker","assfukka","asshole","asshole",
-  "assholes","assmucus†††","assmunch","asswhole","autoerotic","b!tch","b00bs","b17ch","b1tch","ballbag","ballsack",
-  "bang,(onebox†††","bangbros","bareback","bastard","beastial","beastiality","beef,curtain†††","bellend","bestial",
-  "bestiality","bi+ch","biatch","bimbos","birdlock","bitch","bitch,tit†††","bitcher","bitchers","bitches","bitchin",
-  "bitching","bloody","blow,job","blow,me†††","blow,mud†††","blowjob","blowjobs","blue,waffle†††","blumpkin†††","boiolas",
-  "bollock","bollok","boner","boob","boobs","booobs","boooobs","booooobs","booooooobs","breasts","buceta","bugger","bum",
-  "bunny,fucker","bust,a,load†††","busty","butt","butt,fuck†††","butthole","buttmuch","buttplug","c0ck","c0cksucker",
-  "carpet,muncher","carpetmuncher","cawk","chink","choade†††","chota,bags†††","cipa","cl1t","clit","clit,licker†††",
-  "clitoris","clits","clitty,litter†††","clusterfuck","cnut","cock","cock,pocket†††","cock,snot†††","cockface","cockhead",
-  "cockmunch","cockmuncher","cocks","cocksuck,","cocksucked,","cocksucker","cock-sucker","cocksucking","cocksucks,","cocksuka",
-  "cocksukka","cok","cokmuncher","coksucka","coon","cop,some,wood†††","cornhole†††","corp,whore†††","cox","cum","cum,chugger†††",
-  "cum,dumpster†††","cum,freak†††","cum,guzzler†††","cumdump†††","cummer","cumming","cums","cumshot","cunilingus","cunillingus",
-  "cunnilingus","cunt","cunt,hair†††","cuntbag†††","cuntlick,","cuntlicker,","cuntlicking,","cunts","cuntsicle†††",
-  "cunt-struck†††","cut,rope†††","cyalis","cyberfuc","cyberfuck,","cyberfucked,","cyberfucker","cyberfuckers","cyberfucking,","d1ck",
-  "damn","dick","dick,hole†††","dick,shy†††","dickhead","dildo","dildos","dink","dinks","dirsa","dirty,Sanchez†††","dlck","dog-fucker",
-  "doggie,style","doggiestyle","doggin","dogging","donkeyribber","doosh","duche","dyke","eat,a,dick†††","eat,hair,pie†††","ejaculate",
-  "ejaculated","ejaculates,","ejaculating,","ejaculatings","ejaculation","ejakulate","erotic","f,u,c,k","f,u,c,k,e,r","f_u_c_k","f4nny",
-  "facial†††","fag","fagging","faggitt","faggot","faggs","fagot","fagots","fags","fanny","fannyflaps","fannyfucker","fanyy","fatass","fcuk",
-  "fcuker","fcuking","feck","fecker","felching","fellate","fellatio","fingerfuck,","fingerfucked,","fingerfucker,","fingerfuckers","fingerfucking,",
-  "fingerfucks,","fist,fuck†††","fistfuck","fistfucked,","fistfucker,","fistfuckers,","fistfucking,","fistfuckings,","fistfucks,","flange","flog,the,log†††",
-  "fook","fooker","fuck,hole†††","fuck,puppet†††","fuck","trophy†††fuck,yo,mama†††","fuck†††","fucka","fuck-ass†††","fuck-bitch†††","fucked","fucker","fuckers",
-  "fuckhead","fuckheads","fuckin","fucking","fuckings","fuckingshitmotherfucker","fuckme,","fuckmeat†††","fucks","fucktoy†††","fuckwhit","fuckwit","fudge,packer",
-  "fudgepacker","fuk","fuker","fukker","fukkin","fuks","fukwhit","fukwit","fux","fux0r","gangbang","gangbang†††","gang-bang†††","gangbanged,","gangbangs,", "gassy,ass†††",
-  "gaylord","gaysex","goatse","god","god,damn","god-dam","goddamn","goddamned","god-damned","ham,flap†††","hardcoresex,","hell","heshe","hoar","hoare","hoer","homo","homoerotic",
-  "hore","horniest","horny","hotsex","how,to,kill","how,to,murdep","jackoff","jack-off,","jap","jerk",
-  "jerk-off,","jism","jiz,","jizm,","jizz","kawk","kinky,Jesus†††","knob","knob,end","knobead","knobed","knobend","knobend","knobhead","knobjocky","knobjokey","kock","kondum","kondums",
-  "kum","kummer","kumming","kums","kunilingus","kwif†††","l3i+ch","l3itch","labia","LEN","lmao","lmfao","lmfao","lust","liplock","smooching","french kissing","kissing","kiss",
-  "lusting","m0f0","m0fo","m45terbate","ma5terb8","ma5terbate","mafugly†††","masochist","masterb8","masterbat*","masterbat3","masterbate","master-bate","masterbation","masterbations","masturbate",
-  "mof0","mofo","mo-fo","mothafuck","mothafucka","mothafuckas","mothafuckaz","mothafucked,","mothafucker","mothafuckers","mothafuckin","mothafucking,","mothafuckings",
-  "mothafucks","fucker","motherfuck","motherfucked","motherfucker","motherfuckers","motherfuckin","motherfucking","motherfuckings","motherfuckka","motherfucks","muthafecker","muthafuckker","muther",
-  "mutherfucker","n1gga","n1gger","nazi","Predatory","Depression","Redtube","Loli","Lolicon","Cub",
-  "nigg3r","nigg4h","nigga","niggah","niggas","niggaz","nigger","nobhead","nobjocky","nobjokey","numbnuts","nutsack","omg","orgasim,","orgasims,","orgasm","orgasms,","p0rn","pawn","pecker","penis",
-  "penisfucker","phonesex","phuck","phuk","phuked","phuking","phukked","phukking","phuks","phuq","pigfucker","pimpis","piss","pissed","pisser","pissers","porn","porno",
-  "pornography","pornos","prick","pube","pusse","pussi","pussies","pussy","pussy","pussys","queaf†††","queer","rectum","retard","rimjaw","rimming","sadist","sandbar†††","screwing","scroat","scrote",
-  "scrotum","semen","sex","sh!+","sh!t","sh1t","shag","shagger","shaggin","shagging","shemale","shi+","shit","shit","shite","shited","shitey","shitfuck","shitfull","shithead",
-  "shiting","shitings","shits","shitted","shitter","shitting","shittings","skank","slope†††","slut","slut","smegma","smut","snatch","son-of-a-bitch","spac","spunk","t1tt1e5",
-  "t1tties","teets","teez","testical","testicle","tit","titfuck","tits","titt","tittie5","tittiefucker","titties","tittyfuck","tittywank","titwank","tosser","turd","tw4t","twat","twathead","twatty",
-  "twunt","twunter","v14gra","v1gra","vagina","viagra","vulva","w00se","wang","wank","wanker","wanky","whoar","whore","willies","willy","wtf","xrated","xxx","sucker","dumbass",
-  "Kys","Kill","Die","Cliff","Bridge","Shooting","Shoot","Bomb","Terrorist","Terrorism","Bombed","Trump","Maga","Conservative","Necrophilia","Mongoloid","Furfag","Cp","Pedo","Pedophile","Pedophilia",
+    // Adult content - General
+    "porn", "xxx", "adult", "nsfw", "explicit", "sex", "sexual", "nude", "naked",
+    "pornography", "erotic", "mature", "adult content", "adult site", "adult video",
+    "adult material", "adult entertainment", "adult media", "adult web", "adult tube",
+    "adult dating", "adult chat", "adult forum", "adult blog", "adult store",
+    "adult shop", "adult toys", "adult products", "adult services", "adult industry",
+    
+    // Kissing related
+    "kiss", "kissing", "make out", "making out", "french kiss", "french kissing",
+    "deep kiss", "deep kissing", "tongue kiss", "tongue kissing", "passionate kiss",
+    "passionate kissing", "romantic kiss", "romantic kissing", "smooch", "smooching",
+    "peck", "pecking", "snog", "snogging", "necking", "neck", "neck kiss",
+    "neck kissing", "ear kiss", "ear kissing", "lip lock", "lip locking",
+    "lip kiss", "lip kissing", "mouth kiss", "mouth kissing", "soul kiss",
+    "soul kissing", "wet kiss", "wet kissing", "spit swap", "spit swapping",
+    "makeout session", "kissing session", "kiss and tell", "kiss cam",
+    "kiss scene", "kissing scene", "kiss video", "kissing video",
+    "kiss clip", "kissing clip", "kiss movie", "kissing movie",
+    "kiss film", "kissing film", "kiss show", "kissing show",
+    
+    // Adult content - Specific terms
+    "hentai", "ecchi", "doujinshi", "yaoi", "yuri", "lolicon", "shotacon",
+    "bdsm", "fetish", "kink", "bondage", "domination", "submission",
+    "escort", "prostitute", "hooker", "call girl", "massage parlor",
+    "strip club", "strip tease", "lap dance", "peep show",
+    "sex worker", "sex industry", "sex trade", "sex business",
+    "sex shop", "sex store", "sex toys", "sex products",
+    "sex chat", "sex dating", "sex forum", "sex blog",
+    "sex video", "sex clip", "sex movie", "sex film",
+    "sex scene", "sex act", "sex show", "sex performance",
+    
+    // Adult content - Websites
+    "pornhub", "xvideos", "xnxx", "xhamster", "redtube", "youporn",
+    "brazzers", "bangbros", "reality kings", "naughty america",
+    "onlyfans", "chaturbate", "myfreecams", "streamate",
+    "myfreecams", "bongacams", "stripchat", "cam4", "livejasmin",
+    "adultfriendfinder", "ashleymadison", "seeking", "sugardaddy",
+    "sugarbaby", "escort directory", "escort site", "escort service",
+    
+    // Adult content - Categories
+    "amateur", "professional", "homemade", "webcam", "live cam",
+    "streaming", "video chat", "private show", "custom content",
+    "hardcore", "softcore", "lesbian", "gay", "bisexual",
+    "transgender", "transsexual", "shemale", "ladyboy",
+    "teen", "mature", "milf", "dildo", "vibrator",
+    "sex doll", "fleshlight", "butt plug", "anal toy",
+    "lingerie", "underwear", "bra", "panties", "stockings",
+    "garter", "corset", "bikini", "swimsuit", "lingerie",
+    
+    // Adult content - Actions
+    "masturbate", "masturbation", "jerk off", "jack off",
+    "fingering", "oral", "anal", "vaginal", "penetration",
+    "threesome", "orgy", "swinger", "swapping", "wife swap",
+    "cuckold", "cuck", "bull", "hotwife", "stag", "vixen",
+    
+    // Adult content - Body parts
+    "breast", "boob", "tit", "ass", "butt", "pussy", "vagina",
+    "penis", "cock", "dick", "clit", "clitoris", "anus",
+    "butthole", "nipple", "areola", "labia", "vulva",
+    
+    // Violence
+    "violence", "gore", "blood", "death", "kill",
+    
+    // Hate speech
+    "hate", "racist", "sexist", "homophobic", "antisemitic"
 ];
 
 
