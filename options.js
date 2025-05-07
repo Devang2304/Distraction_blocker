@@ -1,41 +1,6 @@
-function isYouTubeVideoPage() {
-    return window.location.hostname.includes('youtube.com') && 
-           window.location.pathname.includes('/watch');
-}
-
-function applyYouTubeBlockingStyle() {
-    if(isYouTubeVideoPage()){
-        const styleElement = document.createElement('style');
-        styleElement.textContent = `
-      ytd-watch-next-secondary-results-renderer {
-        display: none !important;
-      }
-      
-      ytd-item-section-renderer {
-        display: none !important;
-      }
-      
-      .ytp-endscreen-content {
-        display: none !important;
-      }
-      
-      ytd-watch-flexy #primary {
-        max-width: 100% !important;
-        width: 100% !important;
-      }
-      
-      ytd-watch-flexy #secondary {
-        display: none !important;
-      }
-    `;
-    document.head.appendChild(styleElement);
-    console.log("YouTube Focus Mode Activated");
-    }
-}
-
 
 const defaultBlockedKeywords = [
-    "gossip","meme","Arse","Ass","Asshole","Homosexual","Homophobic","Racist","Gay","Lgbt","Jew",
+  "gossip","meme","Arse","Ass","Asshole","Homosexual","Homophobic","Racist","Gay","Lgbt","Jew",
   "Jewish","Anti-semitic","Chink","Muslims","Muslim","Isis","Islamophobe","homophobe,","Bombing",
   "Sexyhot","Bastard","Bitch","Fucker","Cunt","Damn","Fuck","Goddamn","Shit","Motherfucker","Nigga",
   "Nigger","Prick","Shit","shit,ass","Shitass","son,of,a,bitch","Whore","Thot","Slut","Faggot","Dick",
@@ -83,117 +48,39 @@ const defaultBlockedKeywords = [
   "Kys","Kill","Die","Cliff","Bridge","Shooting","Shoot","Bomb","Terrorist","Terrorism","Bombed","Trump","Maga","Conservative","Necrophilia","Mongoloid","Furfag","Cp","Pedo","Pedophile","Pedophilia",
 ];
 
+function saveOptions() {
+  const keywords = document.getElementById('keywords').value.split('\n')
+    .map(keyword => keyword.trim())
+    .filter(keyword => keyword.length > 0);
+  
+  chrome.storage.sync.set({ blockedKeywords: keywords },
+     () => {
+    const status = document.getElementById('status');
+    status.textContent = 'Options saved.';
+    setTimeout(() => {
+      status.textContent = '';
+    }, 2000);
+  });
+}
 
-function checkForBlockedKeywords() {
-    
-    chrome.storage.sync.get({ 
+function restoreOptions() {
+  chrome.storage.sync.get({ blockedKeywords: defaultBlockedKeywords }, (items) => {
+    document.getElementById('keywords').value = items.blockedKeywords.join('\n');
+  });
+}
+
+function initializeDefaultKeywords() {
+  chrome.storage.sync.get({ keywordsInitialized: false }, (data) => {
+    if (!data.keywordsInitialized) {
+      chrome.storage.sync.set({ 
         blockedKeywords: defaultBlockedKeywords,
-        enabled: true
-    }, function(data) {
-        
-        if (!data.enabled) {
-            return;
-        }
-        
-        
-        if (data.blockedKeywords.length === 0) {
-            return;
-        }
-        
-        
-        const pageText = document.body.innerText.toLowerCase();
-        
-        //
-        const foundKeyword = data.blockedKeywords.find(keyword => 
-            pageText.includes(keyword.toLowerCase())
-        );
-        
-        if (foundKeyword) {
-            
-            blockPage(foundKeyword);
-        }
-    });
-}
-
-function blockPage(keyword) {
-    
-    const originalContent = document.documentElement.innerHTML;
-    
-    
-    document.body.innerHTML = `
-        <div style="
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: white;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-        ">
-            <h1 style="color: #333; margin-bottom: 20px;">Page Blocked</h1>
-            <p style="color: #666; max-width: 80%; text-align: center;">
-                This page contains blocked content: "${keyword}"
-            </p>
-            <button id="unblockButton" style="
-                margin-top: 20px;
-                padding: 10px 20px;
-                background-color: #4285f4;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            ">Unblock for 5 minutes</button>
-        </div>
-    `;
-    
-    
-    document.getElementById('unblockButton').addEventListener('click', function() {
-        
-        document.documentElement.innerHTML = originalContent;
-        
-        
-        const scripts = document.getElementsByTagName('script');
-        for (let i = 0; i < scripts.length; i++) {
-            if (scripts[i].src) {
-                const newScript = document.createElement('script');
-                newScript.src = scripts[i].src;
-                document.head.appendChild(newScript);
-            }
-        }
-        
-        
-        setTimeout(function() {
-            checkForBlockedKeywords();
-        }, 5 * 60 * 1000); 
-    });
-}
-
-
-function initialize() {
-    
-    if (window.location.hostname.includes('youtube.com')) {
-        applyYouTubeBlockingStyle();
+        keywordsInitialized: true 
+      });
     }
-    
-    
-    checkForBlockedKeywords();
+  });
 }
 
+initializeDefaultKeywords();
 
-initialize();
-
-
-let lastUrl = location.href;
-new MutationObserver(() => {
-    const url = location.href;
-    if (url !== lastUrl) {
-        lastUrl = url;
-        initialize();
-        setTimeout(initialize, 500); 
-    }
-}).observe(document, {subtree: true, childList: true});
+document.addEventListener('DOMContentLoaded', restoreOptions);
+document.getElementById('save').addEventListener('click', saveOptions);

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Distraction Blocker Options</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      margin-top: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    .info {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #4285f4;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Distraction Blocker Settings</h1>
+  
+  <div class="container">
+    <h2>Blocked Keywords</h2>
+    <p>These keywords are used to identify and block distracting content. You can edit this list or add your own keywords.</p>
+    <textarea id="keywords" placeholder="Enter keywords, one per line"></textarea>
+    
+    <div class="button-group">
+      <button id="save">Save Settings</button>
+      <button id="reset">Reset to Defaults</button>
+      <span id="status"></span>
+    </div>
+  </div>
+  
+  <div class="info">
+    <h3>How it works</h3>
+    <p>When you visit a webpage, the extension scans the page content for any of the keywords listed above. If a match is found, the page will be blocked and replaced with a blank white page.</p>
+    <p>This helps you avoid distracting content and stay focused on your tasks.</p>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

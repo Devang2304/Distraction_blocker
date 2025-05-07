@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Distraction Blocker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      width: 300px;
+      padding: 10px;
+    }
+    h1 {
+      font-size: 18px;
+      color: #333;
+    }
+    .status {
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 4px;
+    }
+    .enabled {
+      background-color: #e6f4ea;
+      color: #137333;
+    }
+    .disabled {
+      background-color: #fce8e6;
+      color: #c5221f;
+    }
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #3367d6;
+    }
+    .options-link {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      color: #4285f4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Distraction Blocker</h1>
+  
+  <div id="status" class="status enabled">
+    Blocking is currently enabled
+  </div>
+  
+  <button id="toggleButton">Disable Blocking</button>
+  
+  <a href="#" id="optionsLink" class="options-link">Manage Blocked Keywords</a>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
