@@ -106,13 +106,26 @@ const defaultBlockedKeywords = [
 function checkForBlockedKeywords() {
     chrome.storage.sync.get({ 
         blockedKeywords: defaultBlockedKeywords,
-        enabled: true
+        enabled: true,
+        excludedSites: []
     }, function(data) {
         if (!data.enabled) {
             return;
         }
         
         if (data.blockedKeywords.length === 0) {
+            return;
+        }
+
+       
+        const currentHostname = window.location.hostname.toLowerCase();
+        const isExcluded = data.excludedSites.some(site => {
+            const cleanSite = site.replace(/^(https?:\/\/)?(www\.)?/, '').toLowerCase();
+            return currentHostname === cleanSite || currentHostname.endsWith('.' + cleanSite);
+        });
+
+        if (isExcluded) {
+            console.log('Site is excluded from keyword blocking:', currentHostname);
             return;
         }
         

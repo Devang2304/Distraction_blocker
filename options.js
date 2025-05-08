@@ -71,10 +71,27 @@ function saveOptions() {
     .map(keyword => keyword.trim())
     .filter(keyword => keyword.length > 0);
   
-  chrome.storage.sync.set({ blockedKeywords: keywords },
-     () => {
+  chrome.storage.sync.set({ 
+    blockedKeywords: keywords
+  }, () => {
     const status = document.getElementById('status');
-    status.textContent = 'Options saved.';
+    status.textContent = 'Keywords saved.';
+    setTimeout(() => {
+      status.textContent = '';
+    }, 2000);
+  });
+}
+
+function saveExcludedSites() {
+  const excludedSites = document.getElementById('excludedSites').value.split('\n')
+    .map(site => site.trim().toLowerCase())
+    .filter(site => site.length > 0);
+  
+  chrome.storage.sync.set({ 
+    excludedSites: excludedSites
+  }, () => {
+    const status = document.getElementById('excludedSitesStatus');
+    status.textContent = 'Excluded sites saved.';
     setTimeout(() => {
       status.textContent = '';
     }, 2000);
@@ -82,8 +99,12 @@ function saveOptions() {
 }
 
 function restoreOptions() {
-  chrome.storage.sync.get({ blockedKeywords: defaultBlockedKeywords }, (items) => {
+  chrome.storage.sync.get({ 
+    blockedKeywords: defaultBlockedKeywords,
+    excludedSites: []
+  }, (items) => {
     document.getElementById('keywords').value = items.blockedKeywords.join('\n');
+    document.getElementById('excludedSites').value = items.excludedSites.join('\n');
   });
 }
 
@@ -92,13 +113,21 @@ function initializeDefaultKeywords() {
     if (!data.keywordsInitialized) {
       chrome.storage.sync.set({ 
         blockedKeywords: defaultBlockedKeywords,
+        excludedSites: [],
         keywordsInitialized: true 
       });
     }
   });
 }
 
-initializeDefaultKeywords();
-
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('save').addEventListener('click', saveOptions);
+document.getElementById('saveExcludedSites').addEventListener('click', saveExcludedSites);
+document.getElementById('reset').addEventListener('click', function() {
+  chrome.storage.sync.set({ 
+    blockedKeywords: defaultBlockedKeywords,
+    excludedSites: []
+  }, restoreOptions);
+});
+
+initializeDefaultKeywords();
